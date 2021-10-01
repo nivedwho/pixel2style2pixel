@@ -53,13 +53,13 @@ class pSp(nn.Module):
 			self.__load_latent_avg(ckpt)
 		else:
 			print('Loading encoders weights from irse50!')
-			encoder_ckpt = torch.load(model_paths['ir_se50'])
+			encoder_ckpt = torch.load('/content/pretrained_models/model_ir_se50.pth')
 			# if input to encoder is not an RGB image, do not load the input layer weights
 			if self.opts.label_nc != 0:
 				encoder_ckpt = {k: v for k, v in encoder_ckpt.items() if "input_layer" not in k}
 			self.encoder.load_state_dict(encoder_ckpt, strict=False)
 			print('Loading decoder weights from pretrained!')
-			ckpt = torch.load(self.opts.stylegan_weights)
+			ckpt = torch.load('/content/pretrained_models/stylegan2-ffhq-config-f.pt')
 			self.decoder.load_state_dict(ckpt['g_ema'], strict=False)
 			if self.opts.learn_in_w:
 				self.__load_latent_avg(ckpt, repeat=1)
