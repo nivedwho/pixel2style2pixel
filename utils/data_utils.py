@@ -17,7 +17,6 @@ def is_image_file(filename):
 def make_dataset(dir):
     images = []
     dir = '/content/imaget1/'
-    os.remove('/content/imaget1/images/._00000.png')
     assert os.path.isdir(dir), '%s is not a valid directory' % dir
     for root, _, fnames in sorted(os.walk(dir)):
         for fname in fnames:
